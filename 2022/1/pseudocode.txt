@@ -1,0 +1,19 @@
+// declare vector of ints or dynamic list to hold sum of calories held by each elf
+vector<int> sums = {};
+
+// try to open file for processing
+file caloriesList = calories.txt
+// catch exception
+
+// process the file,
+// read each line and store it as an int. Use stoi in C++
+// add each line to each element in the vector using an outer and inner loop
+// add each line until you encounter a blank/new line, then move on to the next element in the vector
+// the outer loop holds the cursor for each element in the vector/list
+// the inner loop holds the cursor for each line
+// when the inner loop tries to read the end of file, break.
+for (int i = 0; i < n; i++) {
+  for (int j = 0; j++) {
+    // 
+  }
+}

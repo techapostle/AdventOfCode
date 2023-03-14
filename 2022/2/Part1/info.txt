@@ -1,0 +1,95 @@
+Rock Paper Scissors.
+
+Opponent:
+  A = Rock
+  B = Paper
+  C = Scissors
+
+Me:
+  X: Rock
+  Y: Paper
+  Z: Scissors
+
+
+Objective: Calculate the total score of all rounds played by me.
+
+Scoring system: Sum of each round.
+
+Sum of round = Score of shape + Value of round
+
+Score of shape = { Rock: 1, Paper: 2, Scissors: 3 }
+Value of round = { Loss: 0, Draw: 3, Win: 6 }
+
+
+For example, suppose you were given the following strategy guide:
+  A   Y
+  B   X
+  C   Z
+
+This guide predicts and recommends the following,
+  - In the first round, the opponent chooses Rock (A), and I choose Paper (Y).
+    This means that I win the round with a score of (Paper + Win) = 2 + 6 = 8,
+    and my opponent loses the round with a score of (Rock + Loss) = 1 + 0 = 1.
+  - In the second round, the opponent chooses Paper (B), and I choose Rock (X).
+    This means that I lose the round with a score of (Rock + Loss) = 1 + 0 = 1,
+    and my opponent wins the round with a score of (Paper + Win) = 2 + 6 = 8.
+  - So far, my total score is (First Round + Second Round) = 8 + 1 = 9,
+    and my opponent's total score is (First Round + Second Round) = 1 + 8 = 9.
+  - In the third round, we both draw by choosing scissors, so our score for this
+    round is (Scissors + Draw) =  3 + 3 = 6.
+  - Therefore my final score is 9 + 6 = 15,
+    and my opponent's final score is also 9 + 6 = 15. This match is a draw.
+
+
+Algorithm for calculating my score given a larger input set:
+
+1. Create a hash table of key value pairs for Shapes and Value of shapes.
+   ie. Shapes = { "Rock", "Paper", "Scissors" }
+       Values = { 1,    2,     3        }
+
+2. Create a hash table of key value pairs for Round outcome, and the Value
+   of each outcome.
+   ie. Round = { "Loss", "Draw", "Win" }
+       rdValue = { 0,    3,    6 }
+
+3. Create a dynamic array to store my score for each round called roundResults.
+
+4. Open the input file and read each line to determine the result of each round.
+   Read each line, remember the opponent's shape and mine are separated by a whitespace.
+   When reaching a new line, move on to the next round.
+
+4.1. First check the opponent's shape to see if it exists in the Shapes array,
+     if it does, store its Shapes value in a temporary opShape variable. Then,
+     do the same for my shape to see if it exists in the myShapes array, and
+     store its value in a temporary myShape variable. Use a condition to check assign based on "A", "B", "C" for the opponent, and "X", "Y", "Z" for me.
+     ex. if (opShape == "A") {
+           opShape = "Rock";
+         }
+         if (myShape == "X") {
+           myShape = "Rock";
+         }
+     ex. First line reads: A  Y,
+          opShape = "Rock",
+          myShape = "Paper"
+
+4.2 Create a temporary myRound variable to store the value resulting from my status in the round. Use 9 conditions to check the winner by comparing the Shape values of my opponent and mine.
+    Ex. 
+        if (myShape == opShape) {
+          myRound = "Draw";
+        }
+        if (myShape == "Paper" && opShape == "Rock") {
+          myRound = "Win";
+        }
+        ...
+
+4.2 Based on the keys stored in the myShape and myRound temporary variables,
+    look up the corresponding values in the shValues and rdValue arrays.
+    Store them in the temporary variables tempShValue and tempRdValue, and
+    add them together to store as an element within the roundResults array.
+
+5. Once the file has been read, close it, and move on to the next step.
+
+6. In a loop, add the sum of all elements in the roundResults array within the
+   variable called totalScore.
+
+7. Print the value of totalScore to the console.
